@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.example.android.trackmysleepquality.sleepdetail
+package com.oltoch.sleeptracker.sleepdetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.android.trackmysleepquality.database.SleepDatabaseDao
+import com.oltoch.sleeptracker.database.SleepDatabaseDao
 
 /**
  * This is pretty much boiler plate code for a ViewModel Factory.
@@ -26,8 +26,9 @@ import com.example.android.trackmysleepquality.database.SleepDatabaseDao
  * Provides the key for the night and the SleepDatabaseDao to the ViewModel.
  */
 class SleepDetailViewModelFactory(
-        private val sleepNightKey: Long,
-        private val dataSource: SleepDatabaseDao) : ViewModelProvider.Factory {
+    private val sleepNightKey: Long,
+    private val dataSource: SleepDatabaseDao
+) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SleepDetailViewModel::class.java)) {

@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.example.android.trackmysleepquality.sleepdetail
+package com.oltoch.sleeptracker.sleepdetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.android.trackmysleepquality.database.SleepDatabaseDao
-import com.example.android.trackmysleepquality.database.SleepNight
+import com.oltoch.sleeptracker.database.SleepDatabaseDao
+import com.oltoch.sleeptracker.database.SleepNight
 import kotlinx.coroutines.Job
 
 /**
@@ -30,8 +30,9 @@ import kotlinx.coroutines.Job
  * @param sleepNightKey The key of the current night we are working on.
  */
 class SleepDetailViewModel(
-        private val sleepNightKey: Long = 0L,
-        dataSource: SleepDatabaseDao) : ViewModel() {
+    private val sleepNightKey: Long = 0L,
+    dataSource: SleepDatabaseDao
+) : ViewModel() {
 
     /**
      * Hold a reference to SleepDatabase via its SleepDatabaseDao.

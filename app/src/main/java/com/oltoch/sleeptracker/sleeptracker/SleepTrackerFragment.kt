@@ -38,7 +38,7 @@ class SleepTrackerFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val dataSource = SleepDatabase.getInstance(application).sleepDatabaseDao
-        val viewModelFactory = SleepTrackerViewModelFactory(dataSource,application)
+        val viewModelFactory = SleepTrackerViewModelFactory(dataSource, application)
 
         val sleepTrackerViewModel = ViewModelProvider(this, viewModelFactory)
             .get(SleepTrackerViewModel::class.java)
@@ -46,9 +46,20 @@ class SleepTrackerFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.sleepTrackerViewModel = sleepTrackerViewModel
 
-        sleepTrackerViewModel.navigateToSleepQuality.observe(viewLifecycleOwner, {night ->
+        val adapter = SleepNightAdapter()
+        binding.sleepList.adapter = adapter
+
+        sleepTrackerViewModel.nights.observe(viewLifecycleOwner, {
+            it?.let {
+                //adapter.data = it //for when diffUtil is not used and we have to get the position manually
+                adapter.submitList(it)
+            }
+        })
+
+        sleepTrackerViewModel.navigateToSleepQuality.observe(viewLifecycleOwner, { night ->
             night?.let {
-                this.findNavController().navigate(actionSleepTrackerFragmentToSleepQualityFragment(night.nightId))
+                this.findNavController()
+                    .navigate(actionSleepTrackerFragmentToSleepQualityFragment(night.nightId))
                 sleepTrackerViewModel.doneNavigating()
             }
         })
